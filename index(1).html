@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion Flow Community</title>
+    <style>
+        :root {
+            --blue: #007bff;
+            --orange: #fd7e14;
+            --green: #28a745;
+            --dark: #0f172a;
+        }
+
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            background-color: #050505; 
+            color: white; 
+            overflow-x: hidden;
+        }
+
+        /* Nav Style */
+        nav {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .nav-brand { font-weight: bold; color: var(--orange); font-size: 1.3rem; }
+        .menu-icon { font-size: 30px; cursor: pointer; display: block; }
+
+        .nav-links {
+            display: none; /* Mobile mode default */
+            position: absolute;
+            top: 65px;
+            right: 0;
+            background: #111;
+            width: 100%;
+            flex-direction: column;
+            text-align: center;
+            border-bottom: 2px solid var(--orange);
+        }
+
+        .nav-links a {
+            color: white;
+            padding: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 1px solid #222;
+            cursor: pointer;
+        }
+
+        .nav-links.active { display: flex; }
+
+        /* --- GLOW EFFECT FOR REVIEW OPTION --- */
+        .review-glow {
+            color: #fff !important;
+            font-weight: 800 !important;
+            text-shadow: 0 0 10px var(--orange), 0 0 20px var(--green), 0 0 30px var(--blue);
+            animation: glowAnimation 1.5s infinite alternate;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: 5px 0;
+        }
+
+        @keyframes glowAnimation {
+            0% { text-shadow: 0 0 10px var(--orange); transform: scale(1); }
+            50% { text-shadow: 0 0 20px var(--green); transform: scale(1.02); }
+            100% { text-shadow: 0 0 10px var(--blue); transform: scale(1); }
+        }
+
+        /* Desktop view logic */
+        @media (min-width: 768px) {
+            .menu-icon { display: none; }
+            .nav-links {
+                display: flex !important;
+                position: static;
+                flex-direction: row;
+                width: auto;
+                background: transparent;
+                border: none;
+            }
+            .nav-links a { border: none; padding: 0 15px; }
+        }
+
+        .page-section { display: none; padding: 50px 20px; min-height: 90vh; }
+        .active-section { display: block; animation: fadeInUp 0.8s ease-out; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Review Design */
+        .card {
+            background: #1a1a1a; padding: 30px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid var(--blue);
+            text-align: center; margin-bottom: 20px;
+        }
+        .rev-input {
+            width: 100%; padding: 12px; margin: 10px 0;
+            background: #222; border: 1px solid #444; color: white; border-radius: 10px;
+        }
+        .btn {
+            display: inline-block; padding: 12px 30px; background: var(--blue);
+            color: white; text-decoration: none; border-radius: 50px;
+            font-weight: bold; border: none; cursor: pointer;
+        }
+
+        .review-display {
+            background: #111; padding: 15px; border-radius: 10px; margin-top: 15px;
+            text-align: left; border-left: 4px solid var(--green);
+        }
+
+        header img { width: 160px; border-radius: 50%; border: 4px solid var(--orange); margin-bottom: 20px; }
+        .container { max-width: 900px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .member-card { background: #222; padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #333; }
+        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #777; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-brand">FUSION FLOW COMMUNITY </div>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="nav-links" id="navLinks">
+        <a onclick="show('home')">Dashboard</a>
+        <a onclick="show('panel')">Panel Members</a>
+        <a onclick="show('reviews')" class="review-glow">View All Reviews</a>
+        <a onclick="show('exam')">Exam Details</a>
+        <a onclick="show('prizes')">Prize section</a>
+    </div>
+</nav>
+
+<div id="home" class="page-section active-section">
+    <div class="container">
+        <header>
+            <img src="fusion.jpg" alt="Fusion Fest Logo">
+            <h1>Fusion Flow Community</h1>
+            <p style="color: #bbb;">Welcome to our official portal!</p>
+        </header>
+        <div class="card">
+            <h3>Thank you for visiting us!</h3>
+            <p>📞 Contact(whats app): +8801719397669</p>
+            <a href="#" class="btn" style="background: #1877F2;">Facebook Page</a>
+        </div>
+    </div>
+</div>
+
+<div id="reviews" class="page-section">
+    <div class="container">
+        <form action="https://formspree.io/f/mbdwonyy" method="POST" id="reviewForm" onsubmit="handleFormSubmit(event)">
+            <div class="card" style="border-top-color: var(--orange);">
+                <h2 style="color: var(--orange);">User Reviews & Stars</h2>
+                <input type="text" name="User Name" class="rev-input" placeholder="Your Name" required>
+                <textarea name="Review Message" class="rev-input" placeholder="Write your experience..." required></textarea>
+                <select name="Stars" class="rev-input">
+                    <option value="5 Stars">⭐⭐⭐⭐⭐ (5 Stars)</option>
+                    <option value="4 Stars">⭐⭐⭐⭐ (4 Stars)</option>
+                    <option value="3 Stars">⭐⭐⭐ (3 Stars)</option>
+                    <option value="2 Stars">⭐⭐ (2 Stars)</option>
+                    <option value="1 Star">⭐ (1 Star)</option>
+                </select>
+                <button type="submit" class="btn">Submit Review</button>
+            </div>
+        </form>
+
+        <h3 style="margin-top: 30px;">Featured Reviews:</h3>
+        <div id="publicReviews">
+            <div class="review-display"><p>⭐⭐⭐⭐⭐</p><p><strong>Admin:</strong> Welcome to the feedback section!</p></div>
+        </div>
+    </div>
+</div>
+
+<div id="panel" class="page-section">
+    <div class="container">
+        <h2 style="text-align:center; background: linear-gradient(to right, #fd7e14, #28a745, #007bff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">Panel Members</h2>
+        <div class="grid">
+            <div class="member-card"><img src="rayhan.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #fd7e14; display: block; margin: 0 auto 10px;"><h4>A.k.M Rayhan Munshi</h4><p style="color:var(--orange)">Founder & Chairman</p></div>
+            <div class="member-card"><img src="shafin.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #007bff; display: block; margin: 0 auto 10px;"><h4>Shafin Ahamed</h4><p style="color:var(--blue)">Co-Founder</p></div>
+            <div class="member-card"><img src="siam.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;"><h4>Saimum Azam Siam</h4><p style="color:var(--green)">Marketing Head & COO</p></div>
+            <div class="member-card"><img src="sohail.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;"><h4>Sohail Islam</h4><p style="color:var(--green)">Lead Graphic Designer</p></div>
+            <div class="member-card"><img src="samir.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;"><h4>Samir Ahamed</h4><p style="color:var(--green)">CHRO and Video editor</p></div>
+            <div class="member-card"><img src="ibrahim.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;"><h4>Ibrahim khalil</h4><p style="color:var(--green)">Assistant operating officer </p></div>
+        </div>
+    </div>
+</div>
+
+<div id="prizes" class="page-section">
+    <div class="container">
+        <div class="card" style="border-top-color: var(--green);">
+            <h2 style="color: var(--green);">Prize Details</h2>
+            <p>🔸1st Place: Premium Crest, Medal, Certificate</p>
+            <p>🔸2nd Place: Premium Crest, Medal, Certificate</p>
+            <p>🔸3rd Place: Premium Crest, Medal, Certificate</p>
+            <p style="margin-top: 20px; font-size: 0.9rem;">🔹 All participants will receive an E-Certificate.</p>
+        </div>
+    </div>
+</div>
+
+<div id="exam" class="page-section">
+    <div class="container">
+        <div class="card">
+            <h2>Exam & Syllabus</h2>
+            <p><b>Event Date:</b> May 30, 2026</p>
+            <hr style="border: 0.5px solid #333;">
+            <h4>Islamic Quiz</h4>
+            <p>➡️Syllabus:From the question bank</p>
+            <h4>Photography</h4>
+            <p>➡️Theme:Not specific </p>
+        </div>
+    </div>
+</div>
+
+<footer><p>&copy; 2026 Fusion Fest Community.</p></footer>
+
+<script>
+    function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+
+    function show(id) {
+        const sections = document.querySelectorAll('.page-section');
+        sections.forEach(s => s.classList.remove('active-section'));
+        document.getElementById(id).classList.add('active-section');
+        document.getElementById('navLinks').classList.remove('active');
+        window.scrollTo(0,0);
+    }
+
+    // Ajax Form Submission handling to prevent direct redirect jhamela
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.target;
+        const data = new FormData(form);
+        
+        fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                alert("Thank you! Your review has been submitted to Admin via Email.");
+                form.reset();
+            } else {
+                alert("Oops! There was a problem submitting your review.");
+            }
+        }).catch(error => {
+            alert("Oops! There was a problem submitting your review.");
+        });
+    }
+</script>
+
+</body>
+</html>
