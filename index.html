@@ -27,52 +27,53 @@
             overflow-x: hidden;
         }
 
-        /* Nav Style */
+        /* Nav Style - Fully Left-Aligned */
         nav {
             background: rgba(0, 0, 0, 0.95);
-            padding: 15px 25px;
+            padding: 10px 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid #333;
+            gap: 25px;
         }
 
-        .nav-brand { font-weight: bold; color: var(--orange); font-size: 1.3rem; }
-        .menu-icon { font-size: 30px; cursor: pointer; display: block; }
+        .menu-icon { font-size: 24px; cursor: pointer; display: block; color: white; margin-left: auto; }
 
         .nav-links {
             display: none; 
             position: absolute;
             top: 65px;
+            left: 0;
             right: 0;
             background: #111;
             width: 100%;
             flex-direction: column;
-            text-align: center;
+            text-align: left; /* Left side alignment for Mobile */
             border-bottom: 2px solid var(--orange);
         }
 
         .nav-links a {
             color: white;
-            padding: 20px;
+            padding: 15px 20px;
             text-decoration: none;
             font-weight: bold;
             border-bottom: 1px solid #222;
             cursor: pointer;
+            transition: 0.3s ease;
+            text-align: left; /* Left side alignment */
         }
 
         .nav-links.active { display: flex; }
 
-        .review-glow {
-            color: #fff !important;
-            font-weight: 800 !important;
-            text-shadow: 0 0 10px var(--orange), 0 0 20px var(--green), 0 0 30px var(--blue);
-            animation: glowAnimation 1.5s infinite alternate;
-            border: 1px solid rgba(255,255,255,0.1);
-            margin: 5px 0;
+        /* Mobile Active Menu Item Highlight */
+        .nav-links a.active-menu {
+            color: var(--orange) !important;
+            background: rgba(253, 126, 20, 0.08);
+            border-left: 4px solid var(--orange);
         }
 
         /* Prize Box Floating Animation */
@@ -80,15 +81,6 @@
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
-        }
-
-        /* Grid Layout: Ek line-e 2 ta box rakhar jonno */
-        .prize-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px;
-            padding: 15px;
-            margin-top: 20px;
         }
 
         /* Prize Box-er Design */
@@ -101,20 +93,19 @@
             animation: float 3s ease-in-out infinite;
         }
 
-        /* Alada alada vashar jonno delay */
         .prize-box:nth-child(even) {
             animation-delay: 1.5s;
         }
 
-        @keyframes glowAnimation {
-            0% { text-shadow: 0 0 10px var(--orange); transform: scale(1); }
-            50% { text-shadow: 0 0 20px var(--green); transform: scale(1.02); }
-            100% { text-shadow: 0 0 10px var(--blue); transform: scale(1); }
+        /* Neon Glow Classes for Boxes */
+        .neon-blue {
+            border: 2px solid #007bff !important;
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.4) !important;
         }
 
-        .talentverse-glow {
-            box-shadow: 0 0 60px 15px rgba(253, 126, 20, 0.4) !important;
+        .neon-orange {
             border: 2px solid #fd7e14 !important;
+            box-shadow: 0 0 30px rgba(253, 126, 20, 0.4) !important;
         }
 
         @media (min-width: 768px) {
@@ -126,8 +117,27 @@
                 width: auto;
                 background: transparent;
                 border: none;
+                justify-content: flex-start !important;
+                text-align: left !important;
+                gap: 5px;
             }
-            .nav-links a { border: none; padding: 0 15px; }
+            .nav-links a { 
+                border: none; 
+                padding: 8px 14px; 
+                background: transparent !important;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                text-align: left !important;
+            }
+            .nav-links a:hover {
+                color: var(--orange);
+                background: rgba(255, 255, 255, 0.03) !important;
+            }
+            .nav-links a.active-menu {
+                color: #ffffff !important;
+                background: var(--orange) !important;
+                box-shadow: 0 4px 15px rgba(253, 126, 20, 0.4);
+            }
         }
 
         .page-section { display: none; padding: 50px 20px; min-height: 90vh; }
@@ -163,101 +173,27 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .member-card { background: #222; padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #333; }
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #777; }
-
-        /* --- Welcome Overlay Style --- */
-        #welcome-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(5, 5, 5, 0.95);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        .flying-container {
-            position: absolute;
-            bottom: -150px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: flyUpAndAway 5s ease-in-out forwards;
-        }
-        .fanush {
-            font-size: 50px;
-            filter: drop-shadow(0 0 15px #ffaa00);
-            animation: flicker 0.5s infinite alternate;
-        }
-        .manush {
-            font-size: 45px;
-            margin-top: -10px;
-        }
-        .welcome-sign {
-            background: linear-gradient(45deg, #fd7e14, #ffaa00);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-family: 'Poppins', sans-serif;
-            box-shadow: 0 0 15px rgba(253, 126, 20, 0.6);
-            margin-top: 5px;
-            white-space: nowrap;
-            font-size: 14px;
-        }
-        @keyframes flyUpAndAway {
-            0% { bottom: -150px; transform: scale(0.6) translateX(0); }
-            30% { bottom: 40%; transform: scale(1) translateX(20px); }
-            60% { bottom: 50%; transform: scale(1) translateX(-20px); }
-            100% { bottom: 120%; transform: scale(0.5) translateX(0); }
-        }
-        @keyframes flicker {
-            0% { opacity: 0.9; transform: scale(0.98); }
-            100% { opacity: 1; transform: scale(1.02); }
-        }
-        #overlayCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
 
-<div id="welcome-overlay">
-    <canvas id="overlayCanvas"></canvas>
-    <div class="flying-container">
-        <div class="fanush">🏮</div>
-        <div class="manush">🧍</div>
-        <div class="welcome-sign">✨ Welcome ✨</div>
-    </div>
-</div>
-
-<nav style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">
-    
-    <div style="display: flex; align-items: center; gap: 12px;">
+<nav>
+    <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
         <img src="logo.png" alt="Logo" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #fd7e14;">
-  <div style="display: flex; flex-direction: column; text-align: left; width: fit-content;">
-    <span style="color: #fd7e14; font-size: 22px; font-weight: bold; letter-spacing: 0.5px; line-height: 1.2; white-space: nowrap;">FUSION FLOW</span>
-    
-    <span style="color: #ffffff; font-size: 11px; font-weight: bold; letter-spacing: 9.2px; text-transform: uppercase; opacity: 0.9; display: block; line-height: 1.2; margin-top: 1px; margin-right: -9.2px; white-space: nowrap;">COMMUNITY</span>
-</div>
+        <div style="display: flex; flex-direction: column; text-align: left; width: fit-content;">
+            <span style="color: #fd7e14; font-size: 22px; font-weight: bold; letter-spacing: 0.5px; line-height: 1.2; white-space: nowrap;">FUSION FLOW</span>
+            <span style="color: #ffffff; font-size: 11px; font-weight: bold; letter-spacing: 9.2px; text-transform: uppercase; opacity: 0.9; display: block; line-height: 1.2; margin-top: 1px; margin-right: -9.2px; white-space: nowrap;">COMMUNITY</span>
         </div>
     </div>
 
-    <div class="menu-icon" onclick="toggleMenu()" style="cursor: pointer; font-size: 24px; color: white;">☰</div>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="nav-links" id="navLinks">
-        <a onclick="show('home')">Dashboard</a>
-        <a onclick="show('panel')">Panel Members</a>
-        <a onclick="show('reviews')" class="review-glow">View All Reviews</a>
-        <a onclick="show('exam')">Event Details</a>
-        <a onclick="show('prizes')">Galley</a>
-        <a onclick="show('sponsors')">Sponsors</a>
+        <a onclick="show('home')" id="menu-home" class="active-menu">Dashboard</a>
+        <a onclick="show('panel')" id="menu-panel">Panel Members</a>
+        <a onclick="show('reviews')" id="menu-reviews">View All Reviews</a>
+        <a onclick="show('exam')" id="menu-exam">Event Details</a>
+        <a onclick="show('prizes')" id="menu-prizes">Gallery</a> <!-- 'Galley' থেকে 'Gallery' করা হয়েছে -->
+        <a onclick="show('sponsors')" id="menu-sponsors">Sponsors</a>
     </div>
 </nav>
 
@@ -268,11 +204,10 @@
             <h1>Fusion Flow Community</h1>
             <p style="color: #bbb;">Welcome to our official portal!</p>
         </header>
-        <div class="card">
+        <div class="card neon-blue">
             <h3>Thank you for visiting us!</h3>
-            
-            <p>📞 Contact(whats app): +8801719397669</p>
-            <p>📩E-mail Address :  fusionflowcommunity@gmail.com</p>
+            <p>📞 Contact (WhatsApp): +8801719397669</p>
+            <p>📩 E-mail Address: fusionflowcommunity@gmail.com</p>
             <a href="https://www.facebook.com/share/1B6CxTnaZY/" target="_blank" class="btn" style="background: #1877F2;">
                 Facebook Page
             </a>
@@ -282,7 +217,7 @@
 
 <div id="reviews" class="page-section">
     <div class="container">
-        <div class="card" style="border-top-color: var(--orange);">
+        <div class="card neon-orange" style="border-top-color: var(--orange);">
             <h2 style="color: var(--orange);">User Reviews & Stars</h2>
             <input type="text" id="revName" class="rev-input" placeholder="Your Name">
             <textarea id="revText" class="rev-input" placeholder="Write your experience..."></textarea>
@@ -308,16 +243,16 @@
         <h2 style="text-align: center; color: #ffffff; font-weight: bold;">PANEL <span style="color: #007bff;">MEMBERS</span></h2>
         <div class="grid">
             
-            <div class="member-card" style="border: 2px solid #007bff !important; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important;">
+            <div class="member-card neon-blue">
                 <img src="rayhan.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #fd7e14; display: block; margin: 0 auto 10px;">
                 <h4>A.k.M Rayhan Munshi</h4>
-                <p style="color:var(--orange)">Founder & CEO
+                <p style="color:var(--orange)">Founder & CEO</p>
                 <a href="https://www.facebook.com/share/18iuhuq1e1/" target="_blank" style="text-decoration: none; display: block; margin-top: 10px;">
                     <button style="background-color: #1877F2; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">Contact Facebook</button>
                 </a>
             </div>
 
-            <div class="member-card" style="border: 2px solid #007bff !important; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important;">
+            <div class="member-card neon-blue">
                 <img src="shafin.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #007bff; display: block; margin: 0 auto 10px;">
                 <h4>Shafin Ahamed</h4>
                 <p style="color:var(--blue)">Co-Founder</p>
@@ -326,7 +261,7 @@
                 </a>
             </div>
 
-            <div class="member-card" style="border: 2px solid #007bff !important; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important;">
+            <div class="member-card neon-blue">
                 <img src="siam.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;">
                 <h4>Saimum Azam Siam</h4>
                 <p style="color:var(--green)">Chief Operating Officer & Marketing Head</p>
@@ -334,15 +269,17 @@
                     <button style="background-color: #1877F2; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">Contact Facebook</button>
                 </a>
             </div>
-            <div class="member-card" style="border: 2px solid #007bff !important; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important;">
+            
+            <div class="member-card neon-blue">
                 <img src="alif.png" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;">
-                <h4>Sarian Alif </h4>
+                <h4>Sarian Alif</h4>
                 <p style="color:var(--green)">Segment Coordinator</p>
                 <a href="https://www.facebook.com/share/1EWng6prew/" target="_blank" style="text-decoration: none; display: block; margin-top: 10px;">
                     <button style="background-color: #1877F2; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">Contact Facebook</button>
                 </a>
             </div>
-            <div class="member-card" style="border: 2px solid #007bff !important; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important;">
+            
+            <div class="member-card neon-blue">
                 <img src="tasin.png" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;">
                 <h4>Tasin Tahmid</h4>
                 <p style="color:var(--green)">Chief Human Resources Officer & Marketing Head</p>
@@ -350,7 +287,8 @@
                     <button style="background-color: #1877F2; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">Contact Facebook</button>
                 </a>
             </div>
-            <div class="member-card" style="border: 2px solid #007bff !important; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important;">
+            
+            <div class="member-card neon-blue">
                 <img src="israt.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;">
                 <h4>Israth Jahan Sathi</h4>
                 <p style="color:var(--green)">Team Leader | XANON</p>
@@ -358,7 +296,8 @@
                     <button style="background-color: #1877F2; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">Contact Facebook</button>
                 </a>
             </div>
-<div class="member-card" style="border: 2px solid #007bff !important; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important;">
+            
+            <div class="member-card neon-blue">
                 <img src="ikra.png" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;">
                 <h4>Mehjabin Ikra</h4>
                 <p style="color:var(--green)">Team Leader | ELITE</p>
@@ -366,7 +305,8 @@
                     <button style="background-color: #1877F2; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">Contact Facebook</button>
                 </a>
             </div>
-            <div class="member-card" style="border: 2px solid #007bff !important; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important;">
+            
+            <div class="member-card neon-blue">
                 <img src="sresta.jpg" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #28a745; display: block; margin: 0 auto 10px;">
                 <h4>Srestha Chowdhury</h4>
                 <p style="color:var(--green)">Team Leader | SPARK</p>
@@ -375,30 +315,33 @@
                 </a>
             </div>
 
-         
-
         </div>
     </div>
 </div>
+
 <div id="prizes" class="page-section">
     <div class="container">
         <h2 style="text-align: center; background: linear-gradient(90deg, #ff8a00, #e52e71); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; margin-bottom: 30px;">
-    GALLERY <span style="color: #ffffff; -webkit-text-fill-color: #ffffff;">HIGHLIGHTS</span>
-</h2>
+            GALLERY <span style="color: #ffffff; -webkit-text-fill-color: #ffffff;">HIGHLIGHTS</span>
+        </h2>
         
         <div style="display: flex; justify-content: center; padding: 15px;">
-            <div class="prize-box" onclick="togglePrizeGallery()" style="border-top: 4px solid #fd7e14; max-width: 350px; width: 100%; cursor: pointer; background: rgba(255, 255, 255, 0.05);">
+            <div class="prize-box neon-orange" onclick="togglePrizeGallery()" style="border-top: 4px solid #fd7e14; max-width: 350px; width: 100%; cursor: pointer;">
                 <h3 style="color:#fd7e14; margin: 0; font-size: 1.2rem;">Creative Carnival 2026 Prizes</h3>
                 <p style="color: #888; font-size: 0.85rem; margin-top: 10px;">Click to view images 📸</p>
             </div>
         </div>
 
-        <div id="prizeGalleryDisplay" style="display: none; max-width: 600px; margin: 30px auto 0 auto; background: rgba(26, 26, 26, 0.95); border: 1px solid #333; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); text-align: center;">
+        <div id="prizeGalleryDisplay" class="neon-orange" style="display: none; max-width: 600px; margin: 30px auto 0 auto; background: rgba(26, 26, 26, 0.95); padding: 20px; border-radius: 20px; text-align: center;">
             <h4 style="color: #fd7e14; margin-top: 0;">🏆 Event Memories</h4>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 15px;">
+                <!-- এখানে ৫ টি ছবি যোগ করা হলো -->
                 <img src="prize1.jpg" alt="Prize 1" style="width: 100%; border-radius: 10px; border: 1px solid #444;">
                 <img src="prize2.jpg" alt="Prize 2" style="width: 100%; border-radius: 10px; border: 1px solid #444;">
+                <img src="prize3.jpg" alt="Prize 3" style="width: 100%; border-radius: 10px; border: 1px solid #444;">
+                <img src="prize4.jpg" alt="Prize 4" style="width: 100%; border-radius: 10px; border: 1px solid #444;">
+                <img src="prize5.jpg" alt="Prize 5" style="width: 100%; border-radius: 10px; border: 1px solid #444;">
             </div>
         </div>
     </div>
@@ -412,92 +355,89 @@
         
        <div style="display: flex; flex-direction: column; align-items: flex-start; width: max-content; margin: 40px auto;">
     
-    <span style="color: #fd7e14; font-size: 0.85rem; font-weight: bold; font-family: 'Poppins', sans-serif; opacity: 0.8; margin-bottom: 5px; margin-left: 5px;">
-        Event 1
-    </span>
+        <span style="color: #fd7e14; font-size: 0.85rem; font-weight: bold; font-family: 'Poppins', sans-serif; opacity: 0.8; margin-bottom: 5px; margin-left: 5px;">
+            Event 1
+        </span>
 
-    <div id="eventBox" class="talentverse-glow" onclick="showEventDetails(event)" style="
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: #111;
-        padding: 20px 35px;
-        border-radius: 15px;
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s;
-    ">
-        <div style="display: flex; align-items: center; justify-content: center;">
-            <h2 style="color: #fff; font-size: 1.5rem; margin: 0; font-family: 'Poppins', sans-serif; font-weight: bold;">
-                Creative Carnival 2026
-            </h2>
-            <img src="cc2026.png" alt="Event Logo" style="width: 35px; height: 35px; margin-left: 15px; object-fit: contain;">
+        <div id="eventBox" class="talentverse-glow neon-orange" onclick="showEventDetails(event)" style="
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #111;
+            padding: 20px 35px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        ">
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <h2 style="color: #fff; font-size: 1.5rem; margin: 0; font-family: 'Poppins', sans-serif; font-weight: bold;">
+                    Creative Carnival 2026
+                </h2>
+                <img src="cc2026.png" alt="Event Logo" style="width: 35px; height: 35px; margin-left: 15px; object-fit: contain;">
+            </div>
+            <p style="color: #888; font-size: 0.85rem; margin: 8px 0 0 0; font-family: 'Poppins', sans-serif;">
+                Touch for details
+            </p>
         </div>
-        <p style="color: #888; font-size: 0.85rem; margin: 8px 0 0 0; font-family: 'Poppins', sans-serif;">
-            Touch for details
-        </p>
+
     </div>
 
-</div>
+        <div id="detailsBox" class="neon-orange" style="
+            display: none;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            background: rgba(26, 26, 26, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            color: #fff;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+        ">
+            <h3 style="color: #fd7e14; margin-top: 0; text-align: center; font-size: 1.4rem;">🎉 Creative Carnival 2026</h3>
+            <p style="text-align: center; color: #bbb; font-size: 0.9rem; margin-bottom: 15px;">An extraordinary fusion of creativity and knowledge!</p>
+            <hr style="border: 0.5px solid #333; margin: 15px 0;">
+            
+            <p style="margin-bottom: 5px;"><strong style="color: #fd7e14;">🌟 Event Segments:</strong></p>
+            <p style="margin: 0 0 15px 15px; color: #ddd; line-height: 1.6;">
+                1. Mobile Photography<br>
+                2. General Knowledge Quiz
+            </p>
 
-        <div id="detailsBox" style="
-    display: none;
-    max-width: 600px;
-    margin: 0 auto 40px auto;
-    background: rgba(26, 26, 26, 0.95);
-    border: 1px solid #333;
-    padding: 30px;
-    border-radius: 20px;
-    color: #fff;
-    text-align: left;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    border-top: 5px solid #fd7e14;
-    font-family: 'Poppins', sans-serif;
-">
-    <h3 style="color: #fd7e14; margin-top: 0; text-align: center; font-size: 1.4rem;">🎉 Creative Carnival 2026</h3>
-    <p style="text-align: center; color: #bbb; font-size: 0.9rem; margin-bottom: 15px;">An extraordinary fusion of creativity and knowledge!</p>
-    <hr style="border: 0.5px solid #333; margin: 15px 0;">
-    
-    <p style="margin-bottom: 5px;"><strong style="color: #fd7e14;">🌟 Event Segments:</strong></p>
-    <p style="margin: 0 0 15px 15px; color: #ddd; line-height: 1.6;">
-        1. Mobile Photography<br>
-        2. General Knowledge Quiz
-    </p>
+            <p style="margin-bottom: 5px;"><strong style="color: #fd7e14;">💰 Registration Fee:</strong></p>
+            <p style="margin: 0 0 15px 15px; color: #ddd; line-height: 1.6;">
+                🔹 Fee per segment: 25 BDT<br>
+                🔹 Combo fee (both segments): 40 BDT (Special 10 BDT discount applied)
+            </p>
 
-    <p style="margin-bottom: 5px;"><strong style="color: #fd7e14;">💰 Registration Fee:</strong></p>
-    <p style="margin: 0 0 15px 15px; color: #ddd; line-height: 1.6;">
-        🔹 Fee per segment: 25 BDT<br>
-        🔹 Combo fee (both segments): 40 BDT (Special 10 BDT discount applied)
-    </p>
+            <p style="margin: 0 0 20px 0;"><strong style="color: #ff3330;">🔷 Registration Deadline:</strong> July 16, 2026</p>
 
-    <p style="margin: 0 0 20px 0;"><strong style="color: #ff3330;">🔷 Registration Deadline:</strong> July 16, 2026</p>
+            <p style="margin-bottom: 5px;"><strong style="color: #fd7e14;">🏆 Awards & Prizes:</strong></p>
+            <p style="margin: 0 0 12px 15px; color: #007bff; font-weight: bold;">🎖️ All participants will receive a Digital Certificate!</p>
 
-    <p style="margin-bottom: 5px;"><strong style="color: #fd7e14;">🏆 Awards & Prizes:</strong></p>
-    <p style="margin: 0 0 12px 15px; color: #007bff; font-weight: bold;">🎖️ All participants will receive a Digital Certificate!</p>
+            <p style="margin: 0 0 5px 15px; color: #ccc;">🥇 <strong>1st, 🥈 2nd & 🥉 3rd Place Winners:</strong></p>
+            <p style="margin: 0 0 15px 30px; color: #bbb; line-height: 1.5;">
+                🔹 Special Crest<br>
+                🔹 Medal<br>
+                🔹 Certificate
+            </p>
+            
+            <p style="margin: 0 0 5px 15px; color: #ccc;">🏅 <strong>4th to 10th Place Winners:</strong></p>
+            <p style="margin: 0 0 15px 30px; color: #bbb; line-height: 1.5;">
+                🔹 Printable Sticker (Digital Copy)<br>
+                🔹 5 Special Educational PDF Books
+            </p>
 
-    <p style="margin: 0 0 5px 15px; color: #ccc;">🥇 <strong>1st, 🥈 2nd & 🥉 3rd Place Winners:</strong></p>
-    <p style="margin: 0 0 15px 30px; color: #bbb; line-height: 1.5;">
-        🔹 Special Crest<br>
-        🔹 Medal<br>
-        🔹 Certificate
-    </p>
-    
-    <p style="margin: 0 0 5px 15px; color: #ccc;">🏅 <strong>4th to 10th Place Winners:</strong></p>
-    <p style="margin: 0 0 15px 30px; color: #bbb; line-height: 1.5;">
-        🔹 Printable Sticker (Digital Copy)<br>
-        🔹 5 Special Educational PDF Books
-    </p>
+            <hr style="border: 0.5px solid #333; margin: 15px 0;">
 
-    <hr style="border: 0.5px solid #333; margin: 15px 0;">
+            <h4 style="color: #007bff; margin: 15px 0 5px 0;">🧠 General Knowledge Quiz</h4>
+            <p style="margin: 0 0 5px 15px; color: #ccc;">➡️ <strong>Syllabus:</strong> From the question bank</p>
+            <p style="margin: 0 0 15px 15px; color: #ccc;">➡️ <strong>Quiz Date:</strong> July 17, 2026</p>
 
-    <h4 style="color: #007bff; margin: 15px 0 5px 0;">🧠 General Knowledge Quiz</h4>
-    <p style="margin: 0 0 5px 15px; color: #ccc;">➡️ <strong>Syllabus:</strong> From the question bank</p>
-    <p style="margin: 0 0 15px 15px; color: #ccc;">➡️ <strong>Quiz Date:</strong> July 17, 2026</p>
-
-    <h4 style="color: #28a745; margin: 15px 0 5px 0;">📸 Mobile Photography</h4>
-    <p style="margin: 0 0 5px 15px; color: #ccc;">➡️ <strong>Theme:</strong> Not specific</p>
-    <p style="margin: 0 0 5px 15px; color: #ccc;">➡️ <strong>Platform:</strong> <a href="https://www.facebook.com/share/g/1HdyPhP8qY/" target="_blank" style="color: #28a745; text-decoration: underline;">Official Facebook Group</a></p>
-</div>
+            <h4 style="color: #28a745; margin: 15px 0 5px 0;">📸 Mobile Photography</h4>
+            <p style="margin: 0 0 5px 15px; color: #ccc;">➡️ <strong>Theme:</strong> Not specific</p>
+            <p style="margin: 0 0 5px 15px; color: #ccc;">➡️ <strong>Platform:</strong> <a href="https://www.facebook.com/share/g/1HdyPhP8qY/" target="_blank" style="color: #28a745; text-decoration: underline;">Official Facebook Group</a></p>
+        </div>
         
     </div>
 </div>
@@ -508,7 +448,7 @@
 
     <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap;">
         
-        <div style="background: rgba(255, 255, 255, 0.03); width: 280px; border-radius: 15px; padding: 20px; border: 1px solid rgba(253, 126, 20, 0.2); box-shadow: 0 0 20px rgba(253, 126, 20, 0.15); display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
+        <div class="neon-orange" style="background: rgba(255, 255, 255, 0.03); width: 280px; border-radius: 15px; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
             
             <span style="color: #fd7e14; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; background: rgba(253, 126, 20, 0.1); padding: 5px 12px; border-radius: 20px; margin-bottom: 20px;">Title Sponsor</span>
             
@@ -522,7 +462,8 @@
             
             <div id="sponsor1-details" style="display: none; width: 100%; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); text-align: left; font-size: 13px; color: #ccc; line-height: 1.5;">
                 <p style="margin: 5px 0;"><strong>About:</strong> Details ।</p>
-                <p style="margin: 5px 0;"><strong>Website:</strong> www.company.com</p> <p style="margin: 5px 0;"><strong>Offer:</strong>Details !</p>
+                <p style="margin: 5px 0;"><strong>Website:</strong> www.company.com</p>
+                <p style="margin: 5px 0;"><strong>Offer:</strong> Details !</p>
                 
                 <a href="https://facebook.com/your_sponsor_page_link" target="_blank" style="display: block; text-align: center; background: #1877f2; color: white; text-decoration: none; padding: 8px 0; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 12px; box-shadow: 0 3px 8px rgba(24, 119, 242, 0.3); transition: 0.2s;">
                     Visit Facebook Page
@@ -547,57 +488,6 @@ function toggleSponsorDetails(id) {
 <footer><p>&copy; 2026 Fusion Flow Community.</p></footer>
 
 <script>
-    // Welcome Overlay Logic & Overlay Fireworks Engine
-    const overlayCanvas = document.getElementById('overlayCanvas');
-    let overlayCtx, overlayAnimationId, overlayParticles = [];
-    if(overlayCanvas) {
-        overlayCtx = overlayCanvas.getContext('2d');
-        overlayCanvas.width = window.innerWidth;
-        overlayCanvas.height = window.innerHeight;
-    }
-    class OverlayParticle {
-        constructor(x, y, color) {
-            this.x = x; this.y = y; this.color = color;
-            this.radius = Math.random() * 3 + 1;
-            this.velocity = { x: (Math.random() - 0.5) * 7, y: (Math.random() - 0.5) * 7 };
-            this.alpha = 1;
-            this.decay = Math.random() * 0.02 + 0.015;
-        }
-        draw() {
-            overlayCtx.save(); overlayCtx.globalAlpha = this.alpha; overlayCtx.beginPath();
-            overlayCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-            overlayCtx.fillStyle = this.color; overlayCtx.fill(); overlayCtx.restore();
-        }
-        update() { this.x += this.velocity.x; this.y += this.velocity.y; this.velocity.y += 0.04; this.alpha -= this.decay; }
-    }
-    function createOverlayFirework() {
-        const colors = ['#fd7e14', '#ffaa00', '#007bff', '#28a745', '#fff'];
-        const x = Math.random() * overlayCanvas.width;
-        const y = Math.random() * (overlayCanvas.height * 0.5) + (overlayCanvas.height * 0.1);
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        for (let i = 0; i < 35; i++) { overlayParticles.push(new OverlayParticle(x, y, color)); }
-    }
-    function animateOverlay() {
-        overlayAnimationId = requestAnimationFrame(animateOverlay);
-        overlayCtx.fillStyle = 'rgba(5, 5, 5, 0.15)';
-        overlayCtx.fillRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-        if (Math.random() < 0.15) createOverlayFirework();
-        overlayParticles.forEach((p, idx) => {
-            if (p.alpha > 0) { p.update(); p.draw(); } else { overlayParticles.splice(idx, 1); }
-        });
-    }
-    if(overlayCanvas) animateOverlay();
-    setTimeout(() => {
-        cancelAnimationFrame(overlayAnimationId);
-        const overlay = document.getElementById('welcome-overlay');
-        if(overlay) {
-            overlay.style.transition = "opacity 1s ease";
-            overlay.style.opacity = 0;
-            setTimeout(() => overlay.remove(), 1000);
-        }
-    }, 5000);
-
-    // বক্স ক্লিক করলে ডিটেইলস খোলা/বন্ধ করা এবং বাজি ফোটানো
     function showEventDetails(event) {
         if(event) event.stopPropagation();
         
@@ -623,14 +513,12 @@ function toggleSponsorDetails(id) {
         }
     });
 
-    // বাজি ফোটার সম্পূর্ণ ইঞ্জিন
     const canvas = document.getElementById('fireworksCanvas');
     let ctx, animationFrameId, particles = [];
     if(canvas) ctx = canvas.getContext('2d');
 
     function resizeCanvas() {
         if(!canvas) return;
-        // ক্যানভাস সাইজ স্ক্রিনের ফুল সাইজ করে দেওয়া হলো
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
@@ -655,7 +543,6 @@ function toggleSponsorDetails(id) {
     function createFirework() {
         const colors = ['#fd7e14', '#ffaa00', '#fff', '#ff3300'];
         const x = Math.random() * canvas.width;
-        // বাজি একটু ওপরের দিকে ফোটার জন্য হাইট অ্যাডজাস্ট করা হলো
         const y = Math.random() * (canvas.height * 0.4) + (canvas.height * 0.1);
         const color = colors[Math.floor(Math.random() * colors.length)];
         for (let i = 0; i < 40; i++) { particles.push(new Particle(x, y, color)); }
@@ -690,10 +577,17 @@ function toggleSponsorDetails(id) {
         const sections = document.querySelectorAll('.page-section');
         sections.forEach(s => s.classList.remove('active-section'));
         document.getElementById(id).classList.add('active-section');
+        
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => link.classList.remove('active-menu'));
+        const activeLink = document.getElementById('menu-' + id);
+        if(activeLink) {
+            activeLink.classList.add('active-menu');
+        }
+
         document.getElementById('navLinks').classList.remove('active');
         window.scrollTo(0,0);
         if(id === 'reviews') { loadReviews(); }
-        // সেকশন চেঞ্জ হলে ক্যানভাস সাইজ আবার ঠিক করে নেওয়া হবে
         if(id === 'exam') { resizeCanvas(); }
     }
 
@@ -751,7 +645,7 @@ function toggleSponsorDetails(id) {
         .then(result => {
             alert("Thank you! Your review has been sent to the Admin for approval.");
             document.getElementById('revName').value = "";
-            document.getElementById = "";
+            document.getElementById('revText').value = "";
         })
         .catch(error => {
             alert("Something went wrong. Please try again.");
